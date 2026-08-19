@@ -212,12 +212,12 @@ openspec validate --all --strict --no-interactive
 
 Tasks:
 
-- [ ] Проверить `./gradlew check`
-- [ ] Проверить 80% coverage
-- [ ] Проверить OpenSpec strict validation
-- [ ] Обновить README, если команды запуска или API изменились
-- [ ] Проверить, что `openspec/specs/` соответствует реализованному behavior
-- [ ] Подготовить итоговый список реализованных возможностей
+- [x] Проверить `./gradlew check`
+- [x] Проверить 80% coverage
+- [x] Проверить OpenSpec strict validation
+- [x] Обновить README, если команды запуска или API изменились
+- [x] Проверить, что `openspec/specs/` соответствует реализованному behavior
+- [x] Подготовить итоговый список реализованных возможностей
 
 ## Этап 8. Archive bootstrap change
 
