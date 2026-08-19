@@ -1,6 +1,6 @@
 # Prompt Injection Firewall
 
-Prompt Injection Firewall — небольшой сервис на Kotlin для поиска рискованных prompts до отправки в LLM. Он сочетает быстрые эвристические проверки и опциональный AI-assisted анализ через OpenAI-compatible API.
+Prompt Injection Firewall — компактный API-сервис на Kotlin для предварительной оценки prompts перед отправкой в LLM. Он сочетает быстрые эвристические проверки и опциональный AI-assisted анализ через OpenAI-compatible API.
 
 Проект задуман как компактный security layer для AI-приложений: простой в запуске, удобный для тестирования и прозрачный в объяснении, почему prompt разрешен, отправлен на review или заблокирован.
 
