@@ -5,43 +5,52 @@ import com.ryabov.promptfirewall.model.RiskLevel
 import com.ryabov.promptfirewall.model.RiskSignal
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
+@DisplayName("Агрегация risk signals в итоговое решение")
 class RiskAggregatorTest {
 
     private val aggregator = RiskAggregator()
 
     @Test
+    @DisplayName("Маппит score ниже review-порога в LOW risk")
     fun `maps scores below review threshold to low risk`() {
         assertEquals(RiskLevel.LOW, aggregator.riskLevel(29))
     }
 
     @Test
+    @DisplayName("Маппит review-порог в MEDIUM risk")
     fun `maps review threshold to medium risk`() {
         assertEquals(RiskLevel.MEDIUM, aggregator.riskLevel(30))
     }
 
     @Test
+    @DisplayName("Маппит block-порог в HIGH risk")
     fun `maps block threshold to high risk`() {
         assertEquals(RiskLevel.HIGH, aggregator.riskLevel(60))
     }
 
     @Test
+    @DisplayName("Маппит LOW risk в решение ALLOW")
     fun `maps low risk to allow decision`() {
         assertEquals(Decision.ALLOW, aggregator.decision(RiskLevel.LOW))
     }
 
     @Test
+    @DisplayName("Маппит MEDIUM risk в решение REVIEW")
     fun `maps medium risk to review decision`() {
         assertEquals(Decision.REVIEW, aggregator.decision(RiskLevel.MEDIUM))
     }
 
     @Test
+    @DisplayName("Маппит HIGH risk в решение BLOCK")
     fun `maps high risk to block decision`() {
         assertEquals(Decision.BLOCK, aggregator.decision(RiskLevel.HIGH))
     }
 
     @Test
+    @DisplayName("Собирает score, reasons, signals и AI summary в один response")
     fun `aggregates score reasons signals and ai summary`() {
         val first = RiskSignal(
             code = "instruction_override",
@@ -75,6 +84,7 @@ class RiskAggregatorTest {
     }
 
     @Test
+    @DisplayName("Нормализует суммарный score до 100")
     fun `normalizes aggregated score to one hundred`() {
         val response = aggregator.aggregate(
             signals = listOf(
@@ -90,6 +100,7 @@ class RiskAggregatorTest {
     }
 
     @Test
+    @DisplayName("Возвращает LOW/ALLOW для пустого списка signals")
     fun `aggregates empty signals as low risk allow`() {
         val response = aggregator.aggregate(signals = emptyList(), latencyMs = 1)
 
@@ -101,6 +112,7 @@ class RiskAggregatorTest {
     }
 
     @Test
+    @DisplayName("Отклоняет некорректный порядок порогов")
     fun `rejects invalid threshold range`() {
         assertThrows(IllegalArgumentException::class.java) {
             RiskAggregator(reviewThreshold = 60, blockThreshold = 30)

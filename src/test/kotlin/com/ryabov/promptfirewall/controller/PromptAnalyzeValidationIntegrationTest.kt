@@ -11,9 +11,11 @@ import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 @MicronautTest
+@DisplayName("HTTP validation для prompt analysis API")
 class PromptAnalyzeValidationIntegrationTest {
 
     @Inject
@@ -21,6 +23,7 @@ class PromptAnalyzeValidationIntegrationTest {
     lateinit var client: HttpClient
 
     @Test
+    @DisplayName("Отклоняет пустой prompt с BAD_REQUEST")
     fun `blank prompt is rejected`() {
         val exception = assertThrows(HttpClientResponseException::class.java) {
             client.toBlocking().exchange(
@@ -33,6 +36,7 @@ class PromptAnalyzeValidationIntegrationTest {
     }
 
     @Test
+    @DisplayName("Отклоняет prompt длиннее разрешенного лимита с BAD_REQUEST")
     fun `too long prompt is rejected`() {
         val exception = assertThrows(HttpClientResponseException::class.java) {
             client.toBlocking().exchange(
@@ -45,6 +49,7 @@ class PromptAnalyzeValidationIntegrationTest {
     }
 
     @Test
+    @DisplayName("Отклоняет пустой batch с BAD_REQUEST")
     fun `empty batch is rejected`() {
         val exception = assertThrows(HttpClientResponseException::class.java) {
             client.toBlocking().exchange(

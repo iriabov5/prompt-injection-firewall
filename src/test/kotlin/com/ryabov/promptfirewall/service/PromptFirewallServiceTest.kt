@@ -8,11 +8,14 @@ import java.time.Duration
 import java.util.concurrent.CompletableFuture
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
+@DisplayName("Конкурентная оркестрация prompt firewall")
 class PromptFirewallServiceTest {
 
     @Test
+    @DisplayName("Объединяет CompletableFuture нескольких анализаторов в один response")
     fun `combines analyzer futures into one response`() {
         val service = PromptFirewallService(
             analyzers = listOf(
@@ -31,6 +34,7 @@ class PromptFirewallServiceTest {
     }
 
     @Test
+    @DisplayName("Игнорирует сбой одного анализатора и возвращает успешные signals")
     fun `ignores failed analyzer and returns successful signals`() {
         val service = PromptFirewallService(
             analyzers = listOf(
@@ -47,6 +51,7 @@ class PromptFirewallServiceTest {
     }
 
     @Test
+    @DisplayName("Исключает из результата слишком медленный анализатор по timeout")
     fun `times out slow analyzer`() {
         val service = PromptFirewallService(
             analyzers = listOf(

@@ -5,6 +5,10 @@ import com.ryabov.promptfirewall.model.RiskSignal
 import jakarta.inject.Singleton
 import java.util.concurrent.CompletableFuture
 
+/**
+ * Выявляет попытки получить system prompt, developer instructions или другие
+ * скрытые правила, которые модель не должна раскрывать пользователю.
+ */
 @Singleton
 class SystemPromptLeakAnalyzer : PromptRiskAnalyzer {
 

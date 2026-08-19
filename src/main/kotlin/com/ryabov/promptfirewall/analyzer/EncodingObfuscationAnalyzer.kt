@@ -5,6 +5,10 @@ import com.ryabov.promptfirewall.model.RiskSignal
 import jakarta.inject.Singleton
 import java.util.concurrent.CompletableFuture
 
+/**
+ * Ищет признаки обфускации текста: длинные base64-like фрагменты,
+ * escaped-последовательности и невидимые Unicode-символы.
+ */
 @Singleton
 class EncodingObfuscationAnalyzer : PromptRiskAnalyzer {
 

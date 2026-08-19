@@ -7,6 +7,10 @@ import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 import java.util.concurrent.CompletableFuture
 
+/**
+ * Анализирует URL внутри prompt и ищет признаки скрытых инструкций,
+ * redirect-параметров и подозрительно длинных ссылок.
+ */
 @Singleton
 class UrlInstructionAnalyzer : PromptRiskAnalyzer {
 

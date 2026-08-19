@@ -9,6 +9,10 @@ import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
+/**
+ * Оркестрирует параллельный запуск анализаторов prompt через [CompletableFuture]
+ * и собирает их результаты в единое firewall-решение.
+ */
 class PromptFirewallService(
     private val analyzers: List<PromptRiskAnalyzer>,
     private val riskAggregator: RiskAggregator = RiskAggregator(),
@@ -16,6 +20,10 @@ class PromptFirewallService(
     private val executor: Executor = DEFAULT_EXECUTOR
 ) {
 
+    /**
+     * Запускает все анализаторы конкурентно, применяет timeout/fallback к каждому
+     * из них и возвращает aggregate response без падения из-за одного сбойного анализатора.
+     */
     fun analyze(request: PromptAnalyzeRequest): CompletableFuture<PromptAnalyzeResponse> {
         val startedAt = System.nanoTime()
         val futures = analyzers.map { analyzer ->
@@ -34,6 +42,10 @@ class PromptFirewallService(
             }
     }
 
+    /**
+     * Анализирует batch prompt-запросов и сохраняет порядок ответов таким же,
+     * как порядок входных элементов.
+     */
     fun analyzeBatch(requests: List<PromptAnalyzeRequest>): CompletableFuture<List<PromptAnalyzeResponse>> {
         val futures = requests.map { analyze(it) }
 

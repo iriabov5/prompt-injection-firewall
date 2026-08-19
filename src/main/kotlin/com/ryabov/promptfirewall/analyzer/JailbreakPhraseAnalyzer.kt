@@ -5,6 +5,10 @@ import com.ryabov.promptfirewall.model.RiskSignal
 import jakarta.inject.Singleton
 import java.util.concurrent.CompletableFuture
 
+/**
+ * Находит явные jailbreak-фразы, которыми пользователь просит модель
+ * игнорировать предыдущие инструкции или обойти правила безопасности.
+ */
 @Singleton
 class JailbreakPhraseAnalyzer : PromptRiskAnalyzer {
 

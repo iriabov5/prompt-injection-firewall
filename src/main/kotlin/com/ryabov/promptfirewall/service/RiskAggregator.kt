@@ -5,6 +5,10 @@ import com.ryabov.promptfirewall.model.PromptAnalyzeResponse
 import com.ryabov.promptfirewall.model.RiskLevel
 import com.ryabov.promptfirewall.model.RiskSignal
 
+/**
+ * Преобразует набор risk signals в итоговый score, risk level, decision и
+ * объяснимые reasons, которые возвращаются наружу через API.
+ */
 class RiskAggregator(
     private val scoreNormalizer: ScoreNormalizer = ScoreNormalizer(),
     private val reviewThreshold: Int = DEFAULT_REVIEW_THRESHOLD,
@@ -23,6 +27,10 @@ class RiskAggregator(
         }
     }
 
+    /**
+     * Суммирует веса signals, нормализует итоговый score и формирует ответ анализа.
+     * Reasons возвращаются в стабильном порядке, чтобы HTTP-ответы и тесты были детерминированными.
+     */
     fun aggregate(
         signals: List<RiskSignal>,
         latencyMs: Long,
@@ -42,6 +50,9 @@ class RiskAggregator(
         )
     }
 
+    /**
+     * Определяет уровень риска по настроенным порогам review/block.
+     */
     fun riskLevel(score: Int): RiskLevel {
         val normalizedScore = scoreNormalizer.normalize(score)
 
@@ -52,6 +63,9 @@ class RiskAggregator(
         }
     }
 
+    /**
+     * Маппит уровень риска в решение firewall для вызывающей системы.
+     */
     fun decision(riskLevel: RiskLevel): Decision = when (riskLevel) {
         RiskLevel.LOW -> Decision.ALLOW
         RiskLevel.MEDIUM -> Decision.REVIEW

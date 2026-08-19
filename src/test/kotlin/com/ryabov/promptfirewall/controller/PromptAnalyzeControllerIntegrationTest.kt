@@ -13,9 +13,11 @@ import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 @MicronautTest
+@DisplayName("HTTP API анализа prompt")
 class PromptAnalyzeControllerIntegrationTest {
 
     @Inject
@@ -23,6 +25,7 @@ class PromptAnalyzeControllerIntegrationTest {
     lateinit var client: HttpClient
 
     @Test
+    @DisplayName("Возвращает LOW risk и ALLOW decision для безопасного prompt")
     fun `safe prompt returns low risk allow response`() {
         val response = client.toBlocking().retrieve(
             HttpRequest.POST("/api/v1/prompts/analyze", PromptAnalyzeRequest("Summarize this text")),
@@ -36,6 +39,7 @@ class PromptAnalyzeControllerIntegrationTest {
     }
 
     @Test
+    @DisplayName("Возвращает HIGH risk и BLOCK decision для prompt с двумя опасными сигналами")
     fun `high risk prompt returns block response`() {
         val response = client.toBlocking().retrieve(
             HttpRequest.POST(
@@ -52,6 +56,7 @@ class PromptAnalyzeControllerIntegrationTest {
     }
 
     @Test
+    @DisplayName("Batch-анализ сохраняет порядок результатов")
     fun `batch analysis preserves item order`() {
         val response = client.toBlocking().retrieve(
             HttpRequest.POST(

@@ -7,9 +7,11 @@ import io.micronaut.http.client.annotation.Client
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 @MicronautTest
+@DisplayName("HTTP health endpoint runtime")
 class RuntimeHealthControllerIntegrationTest {
 
     @Inject
@@ -17,6 +19,7 @@ class RuntimeHealthControllerIntegrationTest {
     lateinit var client: HttpClient
 
     @Test
+    @DisplayName("Возвращает состояние runtime, число анализаторов и выключенный AI provider")
     fun `reports heuristic runtime health`() {
         val response = client.toBlocking().retrieve(
             HttpRequest.GET<Any>("/api/v1/health"),

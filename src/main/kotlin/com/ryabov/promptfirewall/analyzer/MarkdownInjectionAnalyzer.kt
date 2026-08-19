@@ -5,6 +5,10 @@ import com.ryabov.promptfirewall.model.RiskSignal
 import jakarta.inject.Singleton
 import java.util.concurrent.CompletableFuture
 
+/**
+ * Проверяет Markdown/HTML-разметку на скрытые инструкции, поддельные role markers
+ * и ссылки, в тексте которых спрятаны управляющие команды.
+ */
 @Singleton
 class MarkdownInjectionAnalyzer : PromptRiskAnalyzer {
 
