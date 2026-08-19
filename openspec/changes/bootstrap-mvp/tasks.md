@@ -33,14 +33,14 @@ openspec validate --all --strict --no-interactive
 
 Tasks:
 
-- [ ] Создать Gradle Kotlin DSL project
-- [ ] Добавить Micronaut Kotlin dependencies
-- [ ] Добавить Reactor support
-- [ ] Добавить JUnit 5, MockK и JaCoCo
-- [ ] Настроить JaCoCo coverage report
-- [ ] Настроить JaCoCo coverage verification на 80%
-- [ ] Добавить минимальный application config
-- [ ] Добавить минимальный smoke test запуска context
+- [x] Создать Gradle Kotlin DSL project
+- [x] Добавить Micronaut Kotlin dependencies
+- [x] Добавить Reactor support
+- [x] Добавить JUnit 5, MockK и JaCoCo
+- [x] Настроить JaCoCo coverage report
+- [x] Настроить JaCoCo coverage verification на 80%
+- [x] Добавить минимальный application config
+- [x] Добавить минимальный smoke test запуска context
 
 ## Этап 2. Domain model
 
