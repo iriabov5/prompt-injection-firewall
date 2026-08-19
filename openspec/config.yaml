@@ -1,0 +1,51 @@
+schema: spec-driven
+
+context: |
+  Проект: Prompt Injection Firewall.
+  Язык документации OpenSpec: русский.
+  Технологии: Kotlin, Micronaut, Gradle Kotlin DSL, Reactor, CompletableFuture, JUnit 5, MockK, JaCoCo.
+  Подход: Specification Driven Development. Папка openspec/specs является SSOT для поведения системы.
+  В спецификациях допускается русский текст, но служебные заголовки OpenSpec должны сохранять формат Requirement и Scenario.
+  Требования формулируются с SHALL, чтобы проходить strict-валидацию OpenSpec.
+
+rules:
+  proposal:
+    - Пиши proposal на русском языке.
+    - Всегда явно отделяй цели от не-целей.
+  design:
+    - Пиши design на русском языке.
+    - Показывай, какие возможности Micronaut используются осознанно.
+  tasks:
+    - Пиши tasks на русском языке.
+    - Держи задачи проверяемыми и достаточно маленькими.
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+# Add your tech stack, conventions, style guides, domain knowledge, etc.
+# Example:
+#   context: |
+#     Tech stack: TypeScript, React, Node.js
+#     We use conventional commits
+#     Domain: e-commerce platform
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing
