@@ -119,17 +119,17 @@ openspec validate --all --strict --no-interactive
 
 Tasks:
 
-- [ ] Добавить interface `PromptRiskAnalyzer`
-- [ ] Добавить jailbreak phrase analyzer
-- [ ] Добавить system prompt leak analyzer
-- [ ] Добавить encoding obfuscation analyzer
-- [ ] Добавить URL instruction analyzer
-- [ ] Добавить markdown injection analyzer
-- [ ] Добавить concurrent analyzer orchestration через `CompletableFuture`
-- [ ] Добавить timeout для analyzer execution
-- [ ] Добавить fallback при ошибке одного analyzer
-- [ ] Добавить unit tests для каждого analyzer
-- [ ] Добавить unit tests для orchestration и fault tolerance
+- [x] Добавить interface `PromptRiskAnalyzer`
+- [x] Добавить jailbreak phrase analyzer
+- [x] Добавить system prompt leak analyzer
+- [x] Добавить encoding obfuscation analyzer
+- [x] Добавить URL instruction analyzer
+- [x] Добавить markdown injection analyzer
+- [x] Добавить concurrent analyzer orchestration через `CompletableFuture`
+- [x] Добавить timeout для analyzer execution
+- [x] Добавить fallback при ошибке одного analyzer
+- [x] Добавить unit tests для каждого analyzer
+- [x] Добавить unit tests для orchestration и fault tolerance
 
 ## Этап 5. Micronaut runtime
 
