@@ -238,7 +238,7 @@ openspec validate --all --strict --no-interactive
 
 Tasks:
 
-- [ ] Убедиться, что все tasks в `bootstrap-mvp` выполнены
-- [ ] Выполнить archive change
-- [ ] Проверить, что SSOT specs обновлены
-- [ ] Закоммитить archive result
+- [x] Убедиться, что все tasks в `bootstrap-mvp` выполнены
+- [x] Выполнить archive change
+- [x] Проверить, что SSOT specs обновлены
+- [x] Закоммитить archive result
