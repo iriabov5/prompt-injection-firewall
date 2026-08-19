@@ -8,6 +8,7 @@ plugins {
     id("com.google.devtools.ksp") version "2.3.7"
     id("io.micronaut.application") version "4.6.2"
     id("io.micronaut.aot") version "4.6.2"
+    id("org.sonarqube") version "7.3.1.8318"
     jacoco
 }
 
@@ -131,4 +132,24 @@ tasks.jacocoTestCoverageVerification {
 
 tasks.check {
     dependsOn(tasks.jacocoTestCoverageVerification)
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "prompt-injection-firewall")
+        property("sonar.projectName", "Prompt Injection Firewall")
+        property("sonar.host.url", "http://localhost:9000")
+        property("sonar.sourceEncoding", "UTF-8")
+        property("sonar.sources", "src/main/kotlin")
+        property("sonar.tests", "src/test/kotlin")
+        property(
+            "sonar.coverage.jacoco.xmlReportPaths",
+            layout.buildDirectory.file("reports/jacoco/test/jacocoTestReport.xml").get().asFile.absolutePath
+        )
+    }
+}
+
+tasks.named("sonar") {
+    dependsOn(tasks.test)
+    dependsOn(tasks.jacocoTestReport)
 }

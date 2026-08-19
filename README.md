@@ -27,6 +27,7 @@ Prompt Injection Firewall — компактный API-сервис на Kotlin 
 - JUnit 5
 - MockK
 - JaCoCo
+- SonarQube
 
 ## Быстрый старт
 
@@ -195,6 +196,30 @@ http://localhost:8080/swagger-ui/index.html
 Целевое покрытие — 80%. Тестовая стратегия строится вокруг пирамиды тестирования: больше всего unit tests, меньше integration tests и небольшое число API smoke tests.
 
 Поведенческие требования описаны в `openspec/specs/`. Тесты должны проверять эти требования, а не дублировать отдельные незафиксированные ожидания.
+
+### SonarQube
+
+Локальный SonarQube запускается через Docker Compose:
+
+```bash
+docker compose up -d sonarqube
+```
+
+UI будет доступен по адресу:
+
+```text
+http://localhost:9000
+```
+
+При первом входе используются стандартные локальные credentials `admin` / `admin`; затем SonarQube попросит сменить пароль. Token для анализа создается в UI SonarQube и не хранится в репозитории.
+
+Полная проверка перед коммитом:
+
+```bash
+./gradlew test jacocoTestCoverageVerification sonar -Dsonar.token=<token>
+```
+
+Перед коммитом нужно исправить замечания SonarQube по bugs, vulnerabilities, security hotspots и code smells. Если замечание является false positive, причину надо явно зафиксировать в change/task notes или commit message.
 
 ## Лицензия
 

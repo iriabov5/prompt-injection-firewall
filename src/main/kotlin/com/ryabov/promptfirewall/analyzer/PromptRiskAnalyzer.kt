@@ -8,7 +8,7 @@ import java.util.concurrent.CompletableFuture
  * Контракт эвристического анализатора, который ищет в prompt один тип риска и
  * возвращает найденные сигналы асинхронно.
  */
-interface PromptRiskAnalyzer {
+fun interface PromptRiskAnalyzer {
 
     /**
      * Анализирует входной prompt и завершает future списком найденных risk signals.

@@ -5,7 +5,7 @@ import java.util.concurrent.CompletableFuture
 /**
  * Порт AI provider, скрывающий конкретный OpenAI-compatible transport от analyzer layer.
  */
-interface AiClient {
+fun interface AiClient {
 
     /**
      * Возвращает AI-assisted оценку prompt или `null`, если provider не смог дать пригодный результат.

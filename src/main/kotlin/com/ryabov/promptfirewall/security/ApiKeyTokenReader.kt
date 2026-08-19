@@ -15,7 +15,7 @@ class ApiKeyTokenReader(
 ) : TokenReader<HttpRequest<*>> {
 
     override fun findToken(request: HttpRequest<*>): Optional<String> =
-        Optional.ofNullable(request.headers.get(apiKeySecurityProperties.headerName))
+        Optional.ofNullable(request.headers[apiKeySecurityProperties.headerName])
             .map(String::trim)
             .filter(String::isNotEmpty)
 

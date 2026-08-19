@@ -12,7 +12,7 @@ import org.reactivestreams.Publisher
  */
 @Client("\${ai.base-url}")
 @Requires(property = "ai.enabled", value = "true")
-interface OpenAiChatCompletionsClient {
+fun interface OpenAiChatCompletionsClient {
 
     /**
      * Отправляет chat completion request с bearer-токеном provider.
