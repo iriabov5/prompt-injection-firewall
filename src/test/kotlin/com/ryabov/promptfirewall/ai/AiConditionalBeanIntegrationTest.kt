@@ -32,7 +32,7 @@ class AiConditionalBeanIntegrationTest {
     fun `creates ai beans when ai is enabled`() {
         assertTrue(beanContext.containsBean(AiPromptAnalyzer::class.java))
         assertTrue(beanContext.containsBean(AiClient::class.java))
-        assertEquals(6, analyzers.size)
+        assertEquals(7, analyzers.size)
     }
 
     @Test

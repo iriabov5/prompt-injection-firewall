@@ -81,3 +81,19 @@ OpenAPI specification SHALL describe the API key security scheme used by protect
 - GIVEN OpenAPI specification генерируется
 - WHEN specification описывает `/api/v1/prompts/**` operations
 - THEN protected operations SHALL reference API key security requirement
+
+### Requirement: Custom rules API documentation
+
+OpenAPI specification SHALL describe custom rules management endpoints.
+
+#### Scenario: Custom rules operations are documented
+
+- **GIVEN** custom rules endpoints реализованы
+- **WHEN** OpenAPI specification генерируется
+- **THEN** specification SHALL contain operations for creating, listing and deleting custom rules
+
+#### Scenario: Custom rules schemas are documented
+
+- **GIVEN** custom rules request and response DTO exist
+- **WHEN** OpenAPI specification генерируется
+- **THEN** specification SHALL describe schemas for custom rule creation and custom rule responses

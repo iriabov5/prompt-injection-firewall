@@ -27,7 +27,7 @@ class RuntimeHealthControllerIntegrationTest {
         )
 
         assertEquals("UP", response.status)
-        assertEquals(5, response.analyzerCount)
+        assertEquals(6, response.analyzerCount)
         assertEquals("disabled", response.aiProvider)
     }
 }

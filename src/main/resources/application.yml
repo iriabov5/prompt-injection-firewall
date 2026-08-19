@@ -56,12 +56,23 @@ micronaut:
       - pattern: /api/v1/prompts/**
         access:
           - isAuthenticated()
+      - pattern: /api/v1/rules
+        access:
+          - isAuthenticated()
+      - pattern: /api/v1/rules/**
+        access:
+          - isAuthenticated()
 
 firewall:
   analyzer-timeout-ms: 500
   max-prompt-length: 12000
   review-threshold: 30
   block-threshold: 60
+  custom-rules:
+    max-rules: 100
+    max-code-length: 64
+    max-pattern-length: 512
+    max-description-length: 256
 
 ai:
   enabled: false

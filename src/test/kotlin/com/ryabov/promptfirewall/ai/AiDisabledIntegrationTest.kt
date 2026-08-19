@@ -32,7 +32,7 @@ class AiDisabledIntegrationTest {
     fun `does not create ai analyzer bean`() {
         assertFalse(beanContext.containsBean(AiPromptAnalyzer::class.java))
         assertFalse(beanContext.containsBean(AiClient::class.java))
-        assertEquals(5, analyzers.size)
+        assertEquals(6, analyzers.size)
     }
 
     @Test

@@ -22,7 +22,7 @@ class MicronautDependencyInjectionIntegrationTest {
     @Test
     @DisplayName("Подключает все analyzer beans в application context")
     fun `injects analyzer beans into application context`() {
-        assertEquals(5, analyzers.size)
+        assertEquals(6, analyzers.size)
     }
 
     @Test

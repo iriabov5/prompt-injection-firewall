@@ -15,6 +15,8 @@ class OpenApiSpecificationTest {
 
         assertTrue(specification.contains("/api/v1/prompts/analyze:"))
         assertTrue(specification.contains("/api/v1/prompts/analyze/batch:"))
+        assertTrue(specification.contains("/api/v1/rules:"))
+        assertTrue(specification.contains("/api/v1/rules/{id}:"))
         assertTrue(specification.contains("/api/v1/health:"))
     }
 
@@ -29,6 +31,9 @@ class OpenApiSpecificationTest {
         assertTrue(specification.contains("BatchPromptAnalyzeResponse:"))
         assertTrue(specification.contains("RuntimeHealthResponse:"))
         assertTrue(specification.contains("RiskSignal:"))
+        assertTrue(specification.contains("CustomRuleCreateRequest:"))
+        assertTrue(specification.contains("CustomRuleResponse:"))
+        assertTrue(specification.contains("CustomRuleType:"))
     }
 
     @Test
@@ -62,6 +67,8 @@ class OpenApiSpecificationTest {
 
         assertTrue(operationBlock(specification, "/api/v1/prompts/analyze:").contains("ApiKeyAuth: []"))
         assertTrue(operationBlock(specification, "/api/v1/prompts/analyze/batch:").contains("ApiKeyAuth: []"))
+        assertTrue(operationBlock(specification, "/api/v1/rules:").contains("ApiKeyAuth: []"))
+        assertTrue(operationBlock(specification, "/api/v1/rules/{id}:").contains("ApiKeyAuth: []"))
         assertTrue(!operationBlock(specification, "/api/v1/health:").contains("ApiKeyAuth: []"))
     }
 

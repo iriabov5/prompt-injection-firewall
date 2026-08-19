@@ -95,6 +95,36 @@ curl -X POST http://localhost:8080/api/v1/prompts/analyze/batch \
   }'
 ```
 
+Создать custom rule:
+
+```bash
+curl -X POST http://localhost:8080/api/v1/rules \
+  -H 'Content-Type: application/json' \
+  -H 'X-API-Key: dev-secret' \
+  -d '{
+    "code": "company_secret_leak",
+    "type": "PHRASE",
+    "phrase": "internal token",
+    "weight": 45,
+    "description": "Prompt mentions internal token",
+    "enabled": true
+  }'
+```
+
+Список custom rules:
+
+```bash
+curl http://localhost:8080/api/v1/rules \
+  -H 'X-API-Key: dev-secret'
+```
+
+Удалить custom rule:
+
+```bash
+curl -X DELETE http://localhost:8080/api/v1/rules/<rule-id> \
+  -H 'X-API-Key: dev-secret'
+```
+
 Health endpoint:
 
 ```bash
@@ -119,6 +149,11 @@ firewall:
   max-prompt-length: 12000
   block-threshold: 60
   review-threshold: 30
+  custom-rules:
+    max-rules: 100
+    max-code-length: 64
+    max-pattern-length: 512
+    max-description-length: 256
 
 security:
   api-key:
@@ -146,7 +181,7 @@ AI_API_KEY=...
 AI_MODEL=gpt-4o-mini
 ```
 
-При `ai.enabled=false` Micronaut не создает AI analyzer. В работе остаются пять эвристических анализаторов, поэтому сервис запускается и анализирует prompts без внешнего API.
+При `ai.enabled=false` Micronaut не создает AI analyzer. В работе остаются эвристические анализаторы и custom rules analyzer, поэтому сервис запускается и анализирует prompts без внешнего API.
 
 ## Документация
 

@@ -2,13 +2,13 @@
 
 ## Purpose
 
-Определяет базовую machine-to-machine защиту analysis endpoints через API key, который задается оператором сервиса через secret/configuration и не создается самим приложением.
+Определяет базовую machine-to-machine защиту protected API endpoints через API key, который задается оператором сервиса через secret/configuration и не создается самим приложением.
 
 ## Requirements
 
-### Requirement: API key protected analysis endpoints
+### Requirement: API key protected endpoints
 
-Система SHALL требовать валидный API key для доступа к `/api/v1/prompts/**`.
+Система SHALL требовать валидный API key для доступа к protected endpoints, включая `/api/v1/prompts/**` и `/api/v1/rules/**`.
 
 #### Scenario: Request without API key is rejected
 
@@ -27,6 +27,12 @@
 - GIVEN API key security включена
 - WHEN клиент отправляет request на `/api/v1/prompts/analyze` с валидным API key
 - THEN система SHALL выполнить prompt analysis
+
+#### Scenario: Custom rules request without API key is rejected
+
+- GIVEN API key security включена
+- WHEN клиент отправляет request на `/api/v1/rules` без API key
+- THEN система SHALL вернуть `401 Unauthorized`
 
 ### Requirement: API key configuration
 
