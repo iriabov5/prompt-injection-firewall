@@ -30,6 +30,7 @@
 ### Modified Capabilities
 
 - `prompt-analysis`: успешный анализ prompt создает audit event после формирования итогового response.
+- `api-key-security`: audit endpoints входят в protected API surface и требуют API key.
 - `micronaut-runtime`: runtime подключает PostgreSQL persistence, миграции и protected reactive audit endpoints.
 - `openapi-documentation`: OpenAPI specification описывает audit endpoints и DTO.
 - `test-coverage`: integration tests для persistence используют Testcontainers PostgreSQL.
