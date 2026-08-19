@@ -1,5 +1,6 @@
 package com.ryabov.promptfirewall.service
 
+import com.ryabov.promptfirewall.audit.AuditRecorder
 import com.ryabov.promptfirewall.analyzer.PromptRiskAnalyzer
 import com.ryabov.promptfirewall.model.PromptAnalyzeRequest
 import com.ryabov.promptfirewall.model.PromptAnalyzeResponse
@@ -18,7 +19,8 @@ class PromptFirewallService(
     private val riskAggregator: RiskAggregator = RiskAggregator(),
     private val analyzerTimeout: Duration = DEFAULT_ANALYZER_TIMEOUT,
     private val executor: Executor = DEFAULT_EXECUTOR,
-    private val promptAnalysisMetrics: PromptAnalysisMetrics? = null
+    private val promptAnalysisMetrics: PromptAnalysisMetrics? = null,
+    private val auditRecorder: AuditRecorder? = null
 ) {
 
     /**
@@ -40,7 +42,10 @@ class PromptFirewallService(
             .thenApply {
                 val signals = futures.flatMap { it.join() }
                 riskAggregator.aggregate(signals, elapsedMillis(startedAt))
-                    .also { promptAnalysisMetrics?.record(request, it) }
+                    .also { response ->
+                        promptAnalysisMetrics?.record(request, response)
+                        auditRecorder?.record(request, response)
+                    }
             }
     }
 

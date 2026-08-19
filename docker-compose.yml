@@ -11,7 +11,20 @@ services:
       - sonarqube_extensions:/opt/sonarqube/extensions
       - sonarqube_logs:/opt/sonarqube/logs
 
+  postgres:
+    image: postgres:15-alpine
+    container_name: prompt-firewall-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: prompt_firewall
+      POSTGRES_USER: prompt_firewall
+      POSTGRES_PASSWORD: prompt_firewall
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
 volumes:
   sonarqube_data:
   sonarqube_extensions:
   sonarqube_logs:
+  postgres_data:

@@ -19,11 +19,14 @@ val kotlinVersion = providers.gradleProperty("kotlinVersion")
 
 dependencies {
     ksp("io.micronaut:micronaut-http-validation")
+    ksp("io.micronaut.data:micronaut-data-processor")
     ksp("io.micronaut.openapi:micronaut-openapi")
     ksp("io.micronaut.serde:micronaut-serde-processor")
     ksp("io.micronaut.validation:micronaut-validation-processor")
 
     implementation("io.micrometer:context-propagation")
+    implementation("io.micronaut.data:micronaut-data-jdbc")
+    implementation("io.micronaut.flyway:micronaut-flyway")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-management")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
@@ -32,6 +35,7 @@ dependencies {
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
     implementation("io.micronaut.security:micronaut-security")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("io.micronaut.validation:micronaut-validation")
     implementation("io.swagger.core.v3:swagger-annotations")
     implementation("jakarta.validation:jakarta.validation-api")
@@ -40,9 +44,14 @@ dependencies {
 
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+    runtimeOnly("org.flywaydb:flyway-database-postgresql")
+    runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.yaml:snakeyaml")
 
     testImplementation("io.mockk:mockk:1.14.6")
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:jdbc")
+    testImplementation("org.testcontainers:postgresql")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
@@ -109,6 +118,7 @@ tasks.jacocoTestReport {
                 exclude(
                     "**/Application*",
                     "**/model/**",
+                    "**/audit/PersistentAuditEvent*",
                     "**/ai/AiAnalysisResult*",
                     "**/ai/AiProperties*",
                     "**/ai/OpenAiChat*"

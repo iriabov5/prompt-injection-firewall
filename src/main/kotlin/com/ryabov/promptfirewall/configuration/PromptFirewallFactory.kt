@@ -1,5 +1,6 @@
 package com.ryabov.promptfirewall.configuration
 
+import com.ryabov.promptfirewall.audit.AuditRecorder
 import com.ryabov.promptfirewall.analyzer.PromptRiskAnalyzer
 import com.ryabov.promptfirewall.service.PromptFirewallService
 import com.ryabov.promptfirewall.service.PromptAnalysisMetrics
@@ -43,11 +44,13 @@ class PromptFirewallFactory {
         analyzers: List<PromptRiskAnalyzer>,
         riskAggregator: RiskAggregator,
         firewallProperties: FirewallProperties,
-        promptAnalysisMetrics: PromptAnalysisMetrics
+        promptAnalysisMetrics: PromptAnalysisMetrics,
+        auditRecorder: AuditRecorder
     ): PromptFirewallService = PromptFirewallService(
         analyzers = analyzers,
         riskAggregator = riskAggregator,
         analyzerTimeout = Duration.ofMillis(firewallProperties.analyzerTimeoutMs),
-        promptAnalysisMetrics = promptAnalysisMetrics
+        promptAnalysisMetrics = promptAnalysisMetrics,
+        auditRecorder = auditRecorder
     )
 }

@@ -183,6 +183,30 @@ AI_MODEL=gpt-4o-mini
 
 При `ai.enabled=false` Micronaut не создает AI analyzer. В работе остаются эвристические анализаторы и custom rules analyzer, поэтому сервис запускается и анализирует prompts без внешнего API.
 
+### Audit Log
+
+Persistent audit log включается отдельно и использует PostgreSQL:
+
+```bash
+AUDIT_ENABLED=true ./gradlew run
+```
+
+Последние audit events:
+
+```bash
+curl 'http://localhost:8080/api/v1/audit/events?limit=20' \
+  -H 'X-API-Key: dev-secret'
+```
+
+Статистика по решениям:
+
+```bash
+curl http://localhost:8080/api/v1/audit/stats \
+  -H 'X-API-Key: dev-secret'
+```
+
+Audit log не хранит исходный prompt. В базе сохраняется только `sha256` hash prompt, source, score, risk, decision, reasons, latency, признак AI usage и timestamp.
+
 ## Документация
 
 Проект ведется в формате Specification Driven Development. Единый источник правды по поведению системы находится здесь:
@@ -238,6 +262,12 @@ http://localhost:8080/swagger-ui/index.html
 
 ```bash
 docker compose up -d sonarqube
+```
+
+PostgreSQL для audit log:
+
+```bash
+docker compose up -d postgres
 ```
 
 UI будет доступен по адресу:
