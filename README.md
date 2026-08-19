@@ -133,6 +133,18 @@ AI_MODEL=gpt-4o-mini
 
 - [OpenSpec specs](openspec/specs)
 
+OpenAPI specification генерируется Micronaut OpenAPI processor из controllers и DTO:
+
+```text
+build/resources/main/META-INF/swagger/prompt-injection-firewall-api-0.1.0.yml
+```
+
+Обновить generated specification можно обычной сборкой:
+
+```bash
+./gradlew build
+```
+
 ## Разработка
 
 Запуск тестов:
