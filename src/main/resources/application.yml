@@ -13,6 +13,8 @@ micronaut:
         enabled: true
         paths: classpath:META-INF/swagger/views/swagger-ui
         mapping: /swagger-ui/**
+  metrics:
+    enabled: true
 
 firewall:
   analyzer-timeout-ms: 500
@@ -29,5 +31,8 @@ ai:
 
 endpoints:
   health:
+    enabled: true
+    sensitive: false
+  metrics:
     enabled: true
     sensitive: false

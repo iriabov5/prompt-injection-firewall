@@ -2,6 +2,7 @@ package com.ryabov.promptfirewall.configuration
 
 import com.ryabov.promptfirewall.analyzer.PromptRiskAnalyzer
 import com.ryabov.promptfirewall.service.PromptFirewallService
+import com.ryabov.promptfirewall.service.PromptAnalysisMetrics
 import com.ryabov.promptfirewall.service.RiskAggregator
 import com.ryabov.promptfirewall.service.ScoreNormalizer
 import io.micronaut.context.annotation.Factory
@@ -41,10 +42,12 @@ class PromptFirewallFactory {
     fun promptFirewallService(
         analyzers: List<PromptRiskAnalyzer>,
         riskAggregator: RiskAggregator,
-        firewallProperties: FirewallProperties
+        firewallProperties: FirewallProperties,
+        promptAnalysisMetrics: PromptAnalysisMetrics
     ): PromptFirewallService = PromptFirewallService(
         analyzers = analyzers,
         riskAggregator = riskAggregator,
-        analyzerTimeout = Duration.ofMillis(firewallProperties.analyzerTimeoutMs)
+        analyzerTimeout = Duration.ofMillis(firewallProperties.analyzerTimeoutMs),
+        promptAnalysisMetrics = promptAnalysisMetrics
     )
 }

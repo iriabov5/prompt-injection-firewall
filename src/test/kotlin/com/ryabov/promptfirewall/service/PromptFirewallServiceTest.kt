@@ -1,9 +1,11 @@
 package com.ryabov.promptfirewall.service
 
+import com.ryabov.promptfirewall.ai.AiProperties
 import com.ryabov.promptfirewall.analyzer.PromptRiskAnalyzer
 import com.ryabov.promptfirewall.model.Decision
 import com.ryabov.promptfirewall.model.PromptAnalyzeRequest
 import com.ryabov.promptfirewall.model.RiskSignal
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry
 import java.time.Duration
 import java.util.concurrent.CompletableFuture
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -66,6 +68,32 @@ class PromptFirewallServiceTest {
         assertEquals(30, response.score)
         assertEquals(Decision.REVIEW, response.decision)
         assertEquals(listOf("fast_signal"), response.reasons)
+    }
+
+    @Test
+    @DisplayName("Batch-анализ записывает метрики для каждого prompt item")
+    fun `batch analysis records metrics per prompt item`() {
+        val meterRegistry = SimpleMeterRegistry()
+        val service = PromptFirewallService(
+            analyzers = listOf(fixedAnalyzer(RiskSignal("instruction_override", 35, "Override"))),
+            promptAnalysisMetrics = PromptAnalysisMetrics(meterRegistry, AiProperties())
+        )
+
+        service
+            .analyzeBatch(
+                listOf(
+                    PromptAnalyzeRequest("first prompt"),
+                    PromptAnalyzeRequest("second prompt")
+                )
+            )
+            .join()
+
+        val counter = meterRegistry
+            .find(PromptAnalysisMetrics.ANALYSIS_TOTAL)
+            .tag("decision", "REVIEW")
+            .counter()
+
+        assertEquals(2.0, counter!!.count())
     }
 
     private fun fixedAnalyzer(signal: RiskSignal): PromptRiskAnalyzer =

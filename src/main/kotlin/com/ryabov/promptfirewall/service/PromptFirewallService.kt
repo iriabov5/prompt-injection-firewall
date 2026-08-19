@@ -17,7 +17,8 @@ class PromptFirewallService(
     private val analyzers: List<PromptRiskAnalyzer>,
     private val riskAggregator: RiskAggregator = RiskAggregator(),
     private val analyzerTimeout: Duration = DEFAULT_ANALYZER_TIMEOUT,
-    private val executor: Executor = DEFAULT_EXECUTOR
+    private val executor: Executor = DEFAULT_EXECUTOR,
+    private val promptAnalysisMetrics: PromptAnalysisMetrics? = null
 ) {
 
     /**
@@ -39,6 +40,7 @@ class PromptFirewallService(
             .thenApply {
                 val signals = futures.flatMap { it.join() }
                 riskAggregator.aggregate(signals, elapsedMillis(startedAt))
+                    .also { promptAnalysisMetrics?.record(request, it) }
             }
     }
 

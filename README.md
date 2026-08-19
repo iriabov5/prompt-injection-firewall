@@ -14,6 +14,7 @@ Prompt Injection Firewall — небольшой сервис на Kotlin для
 - поддержка OpenAI-compatible AI providers;
 - async analyzer pipeline на `CompletableFuture`;
 - Micronaut HTTP endpoints, validation, configuration, conditional beans и health checks;
+- Micronaut Management metrics для наблюдаемости анализа prompt;
 - целевое покрытие тестами 80% через JaCoCo.
 
 ## Стек
@@ -95,6 +96,14 @@ Health endpoint:
 
 ```bash
 curl http://localhost:8080/api/v1/health
+```
+
+Metrics endpoint:
+
+```bash
+curl http://localhost:8080/metrics
+curl http://localhost:8080/metrics/prompt_firewall_analysis_total
+curl http://localhost:8080/metrics/prompt_firewall_analysis_latency
 ```
 
 ## Конфигурация
