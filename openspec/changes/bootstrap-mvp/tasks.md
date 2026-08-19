@@ -89,15 +89,15 @@ openspec validate --all --strict --no-interactive
 
 Tasks:
 
-- [ ] Добавить score normalizer
-- [ ] Добавить risk aggregator
-- [ ] Замаппить score в risk level
-- [ ] Замаппить risk level в decision
-- [ ] Добавить reasons из signals
-- [ ] Добавить unit tests для score boundaries
-- [ ] Добавить unit tests для risk level mapping
-- [ ] Добавить unit tests для decision mapping
-- [ ] Добавить unit tests для explainable signals
+- [x] Добавить score normalizer
+- [x] Добавить risk aggregator
+- [x] Замаппить score в risk level
+- [x] Замаппить risk level в decision
+- [x] Добавить reasons из signals
+- [x] Добавить unit tests для score boundaries
+- [x] Добавить unit tests для risk level mapping
+- [x] Добавить unit tests для decision mapping
+- [x] Добавить unit tests для explainable signals
 
 ## Этап 4. Analyzer pipeline
 
