@@ -36,6 +36,33 @@
 
    Альтернатива — вести только общий counter по decisions. Этого мало для диагностики: при выключенном AI нужно явно понимать, что сервис работает штатно в heuristic mode.
 
+## Metrics Contract
+
+| Metric | Type | Tags | Meaning |
+| --- | --- | --- | --- |
+| `prompt_firewall_analysis_total` | counter | `decision`, `risk`, `source`, `ai_mode`, `ai_outcome` | Количество проанализированных prompt items. Batch увеличивает счетчик на каждый item. |
+| `prompt_firewall_analysis_latency` | timer | `decision`, `risk`, `source`, `ai_mode`, `ai_outcome` | Время полного анализа prompt item после завершения analyzer futures. |
+
+Допустимые значения tags:
+
+| Tag | Values |
+| --- | --- |
+| `decision` | `ALLOW`, `REVIEW`, `BLOCK` |
+| `risk` | `LOW`, `MEDIUM`, `HIGH` |
+| `source` | normalized request source или `unknown`, если source не передан |
+| `ai_mode` | `disabled`, `enabled` |
+| `ai_outcome` | `skipped`, `success`, `failed` |
+
+`source` должен оставаться bounded: пустое значение превращается в `unknown`, слишком длинное или потенциально шумное значение нормализуется тем же ограничением, которое уже задано для request source.
+
+## Acceptance Criteria
+
+- После single analysis endpoint metric `prompt_firewall_analysis_total` увеличивается на 1.
+- После batch analysis endpoint metric `prompt_firewall_analysis_total` увеличивается на количество items.
+- Metrics endpoint позволяет получить список metrics и конкретные значения prompt firewall metrics.
+- При `ai.enabled=false` метрики фиксируют `ai_mode=disabled` и `ai_outcome=skipped`.
+- Существующие health и prompt analysis responses не меняют JSON-контракт.
+
 ## Risks / Trade-offs
 
 - [Risk] Tags с большим числом значений могут привести к высокой cardinality -> Mitigation: использовать только ограниченные enum-like значения `decision`, `risk`, `source`, `ai_mode`/`ai_outcome`.

@@ -14,7 +14,7 @@ Add prompt analysis metrics
 
 - [ ] 2.1 Добавить компонент записи prompt analysis metrics через `MeterRegistry`.
 - [ ] 2.2 Записывать counter для каждого analyzed prompt item.
-- [ ] 2.3 Добавить tags для `decision`, `risk`, `source` и AI mode/outcome с ограниченным набором значений.
+- [ ] 2.3 Добавить tags `decision`, `risk`, `source`, `ai_mode`, `ai_outcome` с ограниченным набором значений.
 - [ ] 2.4 Записывать latency timer для prompt analysis.
 - [ ] 2.5 Сохранить работу heuristic mode при выключенном AI provider.
 
@@ -24,6 +24,7 @@ Add prompt analysis metrics
 - [ ] 3.2 Добавить unit tests для записи latency timer.
 - [ ] 3.3 Добавить integration test доступности management metrics endpoint.
 - [ ] 3.4 Проверить, что batch analysis учитывает каждый prompt item.
+- [ ] 3.5 Проверить имена metrics `prompt_firewall_analysis_total` и `prompt_firewall_analysis_latency`.
 
 ## 4. Documentation
 
