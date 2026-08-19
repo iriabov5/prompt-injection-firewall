@@ -61,13 +61,13 @@ openspec validate --all --strict --no-interactive
 
 Tasks:
 
-- [ ] Добавить request model для prompt analysis
-- [ ] Добавить response model для prompt analysis
-- [ ] Добавить batch request и batch response models
-- [ ] Добавить risk signal model
-- [ ] Добавить risk level enum
-- [ ] Добавить decision enum
-- [ ] Добавить unit tests для model constraints, если появится behavior
+- [x] Добавить request model для prompt analysis
+- [x] Добавить response model для prompt analysis
+- [x] Добавить batch request и batch response models
+- [x] Добавить risk signal model
+- [x] Добавить risk level enum
+- [x] Добавить decision enum
+- [x] Добавить unit tests для model constraints, если появится behavior
 
 ## Этап 3. Risk scoring
 
