@@ -96,3 +96,14 @@ Micronaut runtime SHALL публиковать route или static resources д�
 - WHEN developer открывает Swagger UI route
 - THEN Micronaut SHALL вернуть documentation UI
 - AND prompt analysis SHALL NOT запускаться
+
+### Requirement: Metrics visibility
+
+Micronaut runtime SHALL публиковать prompt analysis metrics через management endpoints без зависимости от включенного AI provider.
+
+#### Scenario: Metrics доступны в heuristic mode
+
+- GIVEN AI provider выключен
+- WHEN developer запрашивает metrics management endpoint
+- THEN Micronaut SHALL вернуть доступные runtime metrics
+- AND core service availability SHALL NOT зависеть от external AI provider
