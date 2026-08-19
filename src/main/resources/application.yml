@@ -3,6 +3,16 @@ micronaut:
     name: prompt-injection-firewall
   server:
     port: 8080
+  router:
+    static-resources:
+      swagger:
+        enabled: true
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      swagger-ui:
+        enabled: true
+        paths: classpath:META-INF/swagger/views/swagger-ui
+        mapping: /swagger-ui/**
 
 firewall:
   analyzer-timeout-ms: 500

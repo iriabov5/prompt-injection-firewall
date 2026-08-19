@@ -1,4 +1,5 @@
 import org.gradle.api.tasks.testing.AbstractTestTask
+import com.google.devtools.ksp.gradle.KspExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -40,6 +41,13 @@ dependencies {
 
     testImplementation("io.mockk:mockk:1.14.6")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+configure<KspExtension> {
+    arg(
+        "micronaut.openapi.views.spec",
+        "mapping.path=swagger,swagger-ui.enabled=true,swagger-ui.theme=flattop"
+    )
 }
 
 application {

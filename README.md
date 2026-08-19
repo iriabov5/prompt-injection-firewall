@@ -139,6 +139,13 @@ OpenAPI specification генерируется Micronaut OpenAPI processor из 
 build/resources/main/META-INF/swagger/prompt-injection-firewall-api-0.1.0.yml
 ```
 
+В запущенном приложении доступны:
+
+```text
+http://localhost:8080/swagger/prompt-injection-firewall-api-0.1.0.yml
+http://localhost:8080/swagger-ui/index.html
+```
+
 Обновить generated specification можно обычной сборкой:
 
 ```bash
