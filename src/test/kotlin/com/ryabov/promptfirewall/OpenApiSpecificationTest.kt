@@ -44,12 +44,44 @@ class OpenApiSpecificationTest {
         assertTrue(specification.contains("JsonError:"))
     }
 
+    @Test
+    @DisplayName("Описывает API key security scheme для защищенных endpoints")
+    fun `generated specification contains api key security scheme`() {
+        val specification = readSpecification()
+
+        assertTrue(specification.contains("ApiKeyAuth:"))
+        assertTrue(specification.contains("type: apiKey"))
+        assertTrue(specification.contains("name: X-API-Key"))
+        assertTrue(specification.contains("security:"))
+    }
+
+    @Test
+    @DisplayName("Требует API key для analysis operations и не требует его для health")
+    fun `generated specification marks protected and anonymous operations`() {
+        val specification = readSpecification()
+
+        assertTrue(operationBlock(specification, "/api/v1/prompts/analyze:").contains("ApiKeyAuth: []"))
+        assertTrue(operationBlock(specification, "/api/v1/prompts/analyze/batch:").contains("ApiKeyAuth: []"))
+        assertTrue(!operationBlock(specification, "/api/v1/health:").contains("ApiKeyAuth: []"))
+    }
+
     private fun readSpecification(): String {
         val resource = javaClass.classLoader.getResourceAsStream(SPECIFICATION_RESOURCE)
 
         assertNotNull(resource, "OpenAPI specification resource must be generated")
 
         return resource!!.bufferedReader().use { it.readText() }
+    }
+
+    private fun operationBlock(specification: String, path: String): String {
+        val start = specification.indexOf("  $path")
+        val next = specification.indexOf("\n  /", start + path.length)
+
+        return if (next == -1) {
+            specification.substring(start)
+        } else {
+            specification.substring(start, next)
+        }
     }
 
     private companion object {

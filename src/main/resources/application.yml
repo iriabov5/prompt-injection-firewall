@@ -3,6 +3,25 @@ micronaut:
     name: prompt-injection-firewall
   server:
     port: 8080
+    cors:
+      enabled: true
+      configurations:
+        web:
+          allowed-origins:
+            - http://localhost:3000
+            - http://localhost:8080
+          allowed-methods:
+            - GET
+            - POST
+            - OPTIONS
+          allowed-headers:
+            - Content-Type
+            - X-API-Key
+          exposed-headers:
+            - X-Content-Type-Options
+            - X-Frame-Options
+            - Referrer-Policy
+          allow-credentials: false
   router:
     static-resources:
       swagger:
@@ -15,6 +34,28 @@ micronaut:
         mapping: /swagger-ui/**
   metrics:
     enabled: true
+  security:
+    enabled: true
+    reject-not-found: false
+    authentication: bearer
+    basic-auth:
+      enabled: false
+    intercept-url-map:
+      - pattern: /api/v1/health
+        access:
+          - isAnonymous()
+      - pattern: /swagger/**
+        access:
+          - isAnonymous()
+      - pattern: /swagger-ui/**
+        access:
+          - isAnonymous()
+      - pattern: /metrics/**
+        access:
+          - isAnonymous()
+      - pattern: /api/v1/prompts/**
+        access:
+          - isAuthenticated()
 
 firewall:
   analyzer-timeout-ms: 500
@@ -28,6 +69,13 @@ ai:
   api-key: ""
   model: gpt-4o-mini
   timeout-ms: 1000
+
+security:
+  api-key:
+    enabled: true
+    header-name: X-API-Key
+    keys:
+      - ${PROMPT_FIREWALL_API_KEY:}
 
 endpoints:
   health:

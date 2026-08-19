@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import reactor.core.publisher.Mono
@@ -23,6 +24,7 @@ import reactor.core.publisher.Mono
  */
 @Controller("/api/v1/prompts")
 @Tag(name = "Prompt Analysis", description = "Анализ prompts на признаки prompt injection")
+@SecurityRequirement(name = "ApiKeyAuth")
 open class PromptAnalyzeController(
     private val promptFirewallService: PromptFirewallService
 ) {

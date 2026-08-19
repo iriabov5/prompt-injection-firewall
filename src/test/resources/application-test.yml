@@ -1,3 +1,9 @@
 micronaut:
   server:
     port: -1
+
+security:
+  api-key:
+    enabled: true
+    keys:
+      - test-secret
