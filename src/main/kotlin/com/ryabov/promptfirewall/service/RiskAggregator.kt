@@ -35,7 +35,7 @@ class RiskAggregator(
             risk = risk,
             score = score,
             decision = decision(risk),
-            reasons = signals.map { it.code }.distinct(),
+            reasons = signals.map { it.code }.distinct().sorted(),
             signals = signals,
             aiSummary = aiSummary,
             latencyMs = latencyMs

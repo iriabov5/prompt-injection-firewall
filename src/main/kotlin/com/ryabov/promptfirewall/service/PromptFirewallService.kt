@@ -3,7 +3,6 @@ package com.ryabov.promptfirewall.service
 import com.ryabov.promptfirewall.analyzer.PromptRiskAnalyzer
 import com.ryabov.promptfirewall.model.PromptAnalyzeRequest
 import com.ryabov.promptfirewall.model.PromptAnalyzeResponse
-import com.ryabov.promptfirewall.model.RiskSignal
 import java.time.Duration
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executor
@@ -33,6 +32,14 @@ class PromptFirewallService(
                 val signals = futures.flatMap { it.join() }
                 riskAggregator.aggregate(signals, elapsedMillis(startedAt))
             }
+    }
+
+    fun analyzeBatch(requests: List<PromptAnalyzeRequest>): CompletableFuture<List<PromptAnalyzeResponse>> {
+        val futures = requests.map { analyze(it) }
+
+        return CompletableFuture
+            .allOf(*futures.toTypedArray())
+            .thenApply { futures.map { it.join() } }
     }
 
     private fun elapsedMillis(startedAt: Long): Long =

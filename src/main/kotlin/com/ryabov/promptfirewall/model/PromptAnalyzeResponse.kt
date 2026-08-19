@@ -1,5 +1,8 @@
 package com.ryabov.promptfirewall.model
 
+import io.micronaut.serde.annotation.Serdeable
+
+@Serdeable
 data class PromptAnalyzeResponse(
     val risk: RiskLevel,
     val score: Int,

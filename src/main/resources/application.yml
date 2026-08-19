@@ -4,6 +4,12 @@ micronaut:
   server:
     port: 8080
 
+firewall:
+  analyzer-timeout-ms: 500
+  max-prompt-length: 12000
+  review-threshold: 30
+  block-threshold: 60
+
 endpoints:
   health:
     enabled: true

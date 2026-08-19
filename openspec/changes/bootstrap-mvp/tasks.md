@@ -151,17 +151,17 @@ openspec validate --all --strict --no-interactive
 
 Tasks:
 
-- [ ] Добавить prompt analysis controller
-- [ ] Добавить batch analysis controller method
-- [ ] Добавить validation annotations
-- [ ] Добавить firewall configuration properties
-- [ ] Добавить health endpoint или health indicator
-- [ ] Подключить analyzer beans через Micronaut DI
-- [ ] Вернуть Reactor type на HTTP boundary
-- [ ] Добавить Micronaut integration tests для controller behavior
-- [ ] Добавить Micronaut integration tests для validation errors
-- [ ] Добавить Micronaut integration tests для configuration binding
-- [ ] Добавить API smoke tests для safe и high-risk prompts
+- [x] Добавить prompt analysis controller
+- [x] Добавить batch analysis controller method
+- [x] Добавить validation annotations
+- [x] Добавить firewall configuration properties
+- [x] Добавить health endpoint или health indicator
+- [x] Подключить analyzer beans через Micronaut DI
+- [x] Вернуть Reactor type на HTTP boundary
+- [x] Добавить Micronaut integration tests для controller behavior
+- [x] Добавить Micronaut integration tests для validation errors
+- [x] Добавить Micronaut integration tests для configuration binding
+- [x] Добавить API smoke tests для safe и high-risk prompts
 
 ## Этап 6. AI provider
 

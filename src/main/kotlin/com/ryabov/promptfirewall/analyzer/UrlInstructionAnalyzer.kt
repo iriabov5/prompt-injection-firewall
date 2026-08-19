@@ -2,10 +2,12 @@ package com.ryabov.promptfirewall.analyzer
 
 import com.ryabov.promptfirewall.model.PromptAnalyzeRequest
 import com.ryabov.promptfirewall.model.RiskSignal
+import jakarta.inject.Singleton
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 import java.util.concurrent.CompletableFuture
 
+@Singleton
 class UrlInstructionAnalyzer : PromptRiskAnalyzer {
 
     override fun analyze(request: PromptAnalyzeRequest): CompletableFuture<List<RiskSignal>> =
