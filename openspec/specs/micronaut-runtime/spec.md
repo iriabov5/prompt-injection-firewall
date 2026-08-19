@@ -133,3 +133,14 @@ Micronaut runtime SHALL разрешать anonymous access только к яв
 - GIVEN management или documentation routes включены
 - WHEN клиент запрашивает metrics, OpenAPI или Swagger UI route
 - THEN Micronaut SHALL apply configured access rule for that route
+
+### Requirement: Reactive feature API boundary
+
+Feature and business HTTP API controllers SHALL expose responses through Reactor types while lightweight diagnostic endpoints MAY return synchronous DTOs.
+
+#### Scenario: Feature API uses reactive boundary
+
+- **GIVEN** controller publishes feature or business API endpoint
+- **WHEN** endpoint returns successful response
+- **THEN** controller method SHALL expose response through Reactor `Mono` or `Flux`
+- **AND** simple synchronous DTO responses SHALL be reserved for lightweight diagnostic endpoints
