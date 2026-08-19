@@ -95,7 +95,10 @@ tasks.jacocoTestReport {
             fileTree(it) {
                 exclude(
                     "**/Application*",
-                    "**/model/**"
+                    "**/model/**",
+                    "**/ai/AiAnalysisResult*",
+                    "**/ai/AiProperties*",
+                    "**/ai/OpenAiChat*"
                 )
             }
         })

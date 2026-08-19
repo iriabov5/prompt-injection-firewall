@@ -183,15 +183,15 @@ openspec validate --all --strict --no-interactive
 
 Tasks:
 
-- [ ] Добавить interface `AiClient`
-- [ ] Добавить AI configuration properties
-- [ ] Добавить OpenAI-compatible HTTP client через Micronaut HTTP client
-- [ ] Добавить conditional AI analyzer bean через `ai.enabled`
-- [ ] Добавить timeout и fallback behavior
-- [ ] Добавить fake AI client для tests
-- [ ] Добавить unit tests для AI analyzer
-- [ ] Добавить Micronaut integration tests для AI disabled mode
-- [ ] Добавить Micronaut integration tests для conditional AI bean
+- [x] Добавить interface `AiClient`
+- [x] Добавить AI configuration properties
+- [x] Добавить OpenAI-compatible HTTP client через Micronaut HTTP client
+- [x] Добавить conditional AI analyzer bean через `ai.enabled`
+- [x] Добавить timeout и fallback behavior
+- [x] Добавить fake AI client для tests
+- [x] Добавить unit tests для AI analyzer
+- [x] Добавить Micronaut integration tests для AI disabled mode
+- [x] Добавить Micronaut integration tests для conditional AI bean
 
 ## Этап 7. MVP hardening
 

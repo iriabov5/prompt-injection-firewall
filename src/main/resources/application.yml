@@ -10,6 +10,13 @@ firewall:
   review-threshold: 30
   block-threshold: 60
 
+ai:
+  enabled: false
+  base-url: https://api.openai.com/v1
+  api-key: ""
+  model: gpt-4o-mini
+  timeout-ms: 1000
+
 endpoints:
   health:
     enabled: true
