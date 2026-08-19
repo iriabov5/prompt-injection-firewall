@@ -21,10 +21,10 @@ services:
       POSTGRES_USER: prompt_firewall
       POSTGRES_PASSWORD: prompt_firewall
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres15_data:/var/lib/postgresql/data
 
 volumes:
   sonarqube_data:
   sonarqube_extensions:
   sonarqube_logs:
-  postgres_data:
+  postgres15_data:
